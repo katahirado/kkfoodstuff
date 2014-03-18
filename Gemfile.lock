@@ -62,9 +62,9 @@ GEM
     mime-types (1.25.1)
     minitest (4.7.5)
     multi_json (1.9.0)
-    mysql2 (0.3.15)
     natto (0.9.6)
       ffi (>= 1.9.0)
+    pg (0.17.1)
     polyglot (0.3.4)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -149,8 +149,8 @@ DEPENDENCIES
   factory_girl_rails
   jbuilder (~> 1.2)
   jquery-rails
-  mysql2
   natto
+  pg
   rails (= 4.0.3)
   rspec-rails (~> 3.0.0.beta)
   sass-rails (~> 4.0.0)
