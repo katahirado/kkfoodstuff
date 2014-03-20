@@ -7,10 +7,12 @@ class Recipe < ActiveRecord::Base
   private
 
   def update_search_content
-    search_content ||= build_search_content
-    search_content.title = self.title if search_content.title.blank? or title_changed?
-    search_content.content = self.content if search_content.content.blank? or content_changed?
-    search_content.save
+    if title_changed? or content_changed?
+      child = SearchContent.find_or_initialize_by(recipe_id: self.id)
+      child.title = self.title
+      child.content = self.content
+      child.save
+    end
   end
 
   def remove_search_content

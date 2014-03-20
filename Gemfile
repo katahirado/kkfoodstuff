@@ -30,7 +30,6 @@ gem 'jbuilder', '~> 1.2'
 
 
 gem 'natto'
-gem 'kaminari', '~> 0.15.1'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
