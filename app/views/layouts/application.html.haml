@@ -1,0 +1,28 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1", name: "viewport"}/
+    %title Kkfoodstuff
+    = stylesheet_link_tag "application", media: "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    %nav.navbar.navbar-default{role: "navigation"}
+      .container-fluid
+        .navbar-header
+          %button.navbar-toggle{"data-target" => "#search_box", "data-toggle" => "collapse", type:  "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{href: root_path} トップ
+        #search_box.collapse.navbar-collapse
+          = form_tag searches_path, method: :get, class: 'navbar-form', role: 'search', id: 'search_box' do
+            .form-group
+              %label.sr-only{for: "word"} 検索ワード
+              = text_field_tag :word, params[:word], class: 'form-control',placeholder: '食材名'
+            .form-group
+              = submit_tag '検索', class: 'btn btn-primary'
+    = yield

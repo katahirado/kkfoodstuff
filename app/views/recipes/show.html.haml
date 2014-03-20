@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Title:
+  = @recipe.title
+%p
+  %strong Book:
+  = @recipe.book
+%p
+  %strong Content:
+  = @recipe.content
+= link_to 'Edit', edit_recipe_path(@recipe)
+|
+\#{link_to 'Back', recipes_path}

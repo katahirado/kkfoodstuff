@@ -1,0 +1,21 @@
+%h1 Listing recipes
+%table
+  %thead
+    %tr
+      %th Title
+      %th Book
+      %th Content
+      %th
+      %th
+      %th
+  %tbody
+    - @recipes.each do |recipe|
+      %tr
+        %td= recipe.title
+        %td= recipe.book
+        %td= recipe.content
+        %td= link_to 'Show', recipe
+        %td= link_to 'Edit', edit_recipe_path(recipe)
+        %td= link_to 'Destroy', recipe, method: :delete, data: {confirm: 'Are you sure?'}
+%br/
+= link_to 'New Recipe', new_recipe_path
