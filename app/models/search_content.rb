@@ -1,8 +1,8 @@
 class SearchContent < ActiveRecord::Base
   belongs_to :recipe
 
-  validates :title, presence: true
-  validates :content, presence: true
+  validates :origin_title, presence: true
+  validates :origin_content, presence: true
 
   before_save :analyze_title_and_content
 
@@ -10,10 +10,18 @@ class SearchContent < ActiveRecord::Base
     where("match(search_contents.title,search_contents.content) against(?)", query_string)
   }
 
+  scope :like_search, ->(query_string) {
+    where(arel_table[:origin_title].matches("%#{query_string}%").or(arel_table[:origin_content].matches("%#{query_string}%")))
+  }
+
+  def self.search(query_string)
+    where("#{fulltext_search(query_string).where_values[0]} OR #{like_search(query_string).where_values.inject(:or).to_sql}")
+  end
+
   private
   def analyze_title_and_content
     nm = Natto::MeCab.new(node_format: '%m\s%f[7]\s', unk_format: '%m\s', eos_format: '')
-    self.title = nm.parse(self.title)
-    self.content = nm.parse(self.content)
+    self.title = nm.parse(self.origin_title)
+    self.content = nm.parse(self.origin_content)
   end
 end

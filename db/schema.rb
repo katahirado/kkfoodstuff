@@ -23,7 +23,9 @@ ActiveRecord::Schema.define(version: 20140320120819) do
 
   create_table "search_contents", force: true do |t|
     t.integer  "recipe_id"
+    t.string   "origin_title"
     t.string   "title"
+    t.text     "origin_content"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"

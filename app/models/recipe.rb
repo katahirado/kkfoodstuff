@@ -9,8 +9,8 @@ class Recipe < ActiveRecord::Base
   def update_search_content
     if title_changed? or content_changed?
       child = SearchContent.find_or_initialize_by(recipe_id: self.id)
-      child.title = self.title
-      child.content = self.content
+      child.origin_title = self.title
+      child.origin_content = self.content
       child.save
     end
   end
