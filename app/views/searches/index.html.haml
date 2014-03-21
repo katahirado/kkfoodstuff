@@ -1,11 +1,6 @@
 %h1 検索結果
-%table.table.table-striped.table-hover
-  %thead
-    %tr
-      %th.col-sm-4 Title
-      %th.col-sm-2 Book
-  %tbody
-    - @recipes.each do |recipe|
-      %tr
-        %td= recipe.title
-        %td= recipe.book
+.list-group
+  - @recipes.each do |recipe|
+    = link_to recipe,class: 'list-group-item' do
+      %h4.list-group-item-heading= recipe.title
+      %p.list-group-item-text= recipe.book
