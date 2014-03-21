@@ -25,4 +25,6 @@
               = text_field_tag :word, params[:word], class: 'form-control',placeholder: '食材名'
             .form-group
               = submit_tag '検索', class: 'btn btn-primary'
-    = yield
+
+    .container
+      = yield

@@ -1,19 +1,17 @@
-%h1 Listing recipes
-%table
+%h1 レシピ一覧
+%table.table.table-striped.table-hover
   %thead
     %tr
-      %th Title
-      %th Book
-      %th Content
-      %th
-      %th
-      %th
+      %th.col-sm-6 Title
+      %th.col-sm-3 Book
+      %th.col-sm-1
+      %th.col-sm-1
+      %th.col-sm-1
   %tbody
     - @recipes.each do |recipe|
       %tr
         %td= recipe.title
         %td= recipe.book
-        %td= recipe.content
         %td= link_to 'Show', recipe
         %td= link_to 'Edit', edit_recipe_path(recipe)
         %td= link_to 'Destroy', recipe, method: :delete, data: {confirm: 'Are you sure?'}
