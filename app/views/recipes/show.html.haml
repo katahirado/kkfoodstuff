@@ -2,13 +2,13 @@
 .panel.panel-primary
   .panel-heading= @recipe.title
   .panel-body
-    .label.label-primary Content
+    = label(:recipe,:content,class: 'label label-primary')
     = simple_format @recipe.content
   .panel-footer
-    %span.label.label-primary Book
+    = label(:recipe,:book,class: 'label label-primary')
     = @recipe.book
-= link_to 'Edit', edit_recipe_path(@recipe)
+= link_to t('views.recipes.actions.edit.title'), edit_recipe_path(@recipe)
 |
-= link_to 'Destroy', @recipe, method: :delete, data: {confirm: 'Are you sure?'}
+= link_to t('views.recipes.inputs.delete'), @recipe, method: :delete, data: {confirm: t('views.recipes.strings.delete')}
 |
-\#{link_to 'Back', recipes_path}
+= link_to t('views.recipes.inputs.index'), recipes_path

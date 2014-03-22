@@ -1,12 +1,9 @@
 - if flash[:notice]
   #notice.alert.alert-success= notice
-%h1 レシピ一覧
+%h1= t('views.recipes.actions.index.title')
 = paginate @recipes
+.new_action= link_to t('views.recipes.actions.new.title'), new_recipe_path
+%br
 .list-group
-  - @recipes.each do |recipe|
-    = link_to recipe,class: 'list-group-item' do
-      %h4.list-group-item-heading= recipe.title
-      %p.list-group-item-text= recipe.book
+  = render @recipes
 = paginate @recipes
-%br/
-= link_to 'New Recipe', new_recipe_path

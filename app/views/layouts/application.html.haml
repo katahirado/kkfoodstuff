@@ -17,14 +17,14 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.navbar-brand{href: root_path} レシピ一覧
+          %a.navbar-brand{href: root_path}= t('views.recipes.actions.index.title')
         #search_box.collapse.navbar-collapse
           = form_for :search,url: searches_path,method: :get,html: {class: 'navbar-form', role: 'search', id: 'search_box'} do |f|
             .form-group
               %label.sr-only{for: "word"} 検索ワード
               = f.text_field :word,  class: 'form-control',placeholder: '食材名,レシピ名'
             .form-group
-              = f.submit '検索', class: 'btn btn-primary'
+              = f.submit t('views.inputs.search'), class: 'btn btn-primary'
 
     .container
       = yield

@@ -1,0 +1,16 @@
+ja:
+  views:
+    recipes:
+      actions:
+        index:
+          title: レシピ一覧
+        new:
+          title: レシピ登録
+        edit:
+          title:  レシピ編集
+      inputs:
+        back: レシピに戻る
+        delete: レシピ削除
+        index: レシピ一覧へ戻る
+      strings:
+        delete: 本当に削除しますか？
