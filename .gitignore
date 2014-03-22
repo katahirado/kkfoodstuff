@@ -18,3 +18,4 @@ database.yml
 vendor/bundle/
 /coverage/**/*
 /coverage/**
+/public/assets
