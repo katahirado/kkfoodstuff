@@ -7,3 +7,10 @@ ja:
         title: レシピ名
         book: レシピ本、掲載ページ
         content: 食材、メモ
+    flash:
+      recipe:
+        actions:
+          create:
+            success: レシピを登録しました。
+          update:
+            success: レシピを更新しました。

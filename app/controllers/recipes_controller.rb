@@ -20,7 +20,7 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.save
-        format.html { redirect_to recipes_path, notice: 'Recipe was successfully created.' }
+        format.html { redirect_to recipes_path, notice: t('activerecord.flash.recipe.actions.create.success') }
         format.json { render action: 'show', status: :created, location: @recipe }
       else
         format.html { render action: 'new' }
@@ -32,7 +32,7 @@ class RecipesController < ApplicationController
   def update
     respond_to do |format|
       if @recipe.update(recipe_params)
-        format.html { redirect_to recipes_path, notice: 'Recipe was successfully updated.' }
+        format.html { redirect_to recipes_path, notice: t('activerecord.flash.recipe.actions.update.success') }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -50,11 +50,11 @@ class RecipesController < ApplicationController
   end
 
   private
-    def set_recipe
-      @recipe = Recipe.find(params[:id])
-    end
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
+  end
 
-    def recipe_params
-      params.require(:recipe).permit(:title, :book, :content)
-    end
+  def recipe_params
+    params.require(:recipe).permit(:title, :book, :content)
+  end
 end
