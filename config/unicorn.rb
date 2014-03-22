@@ -103,8 +103,6 @@
 
 worker_processes 2
 
-user "_www", "_www"
-
 listen File.expand_path('tmp/sockets/unicorn.sock', ENV['RAILS_ROOT'])
 
 stderr_path File.expand_path('log/unicorn.log', ENV['RAILS_ROOT'])
