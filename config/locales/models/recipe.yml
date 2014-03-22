@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      recipe: 料理
+    attributes:
+      recipe:
+        title: 料理名
+        book: 料理本情報
+        content: 食材名
