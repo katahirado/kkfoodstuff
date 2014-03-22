@@ -1,13 +1,12 @@
 %p#notice= notice
-%p
-  %strong Title:
-  = @recipe.title
-%p
-  %strong Book:
-  = @recipe.book
-%p
-  %strong Content:
-  = @recipe.content
+.panel.panel-primary
+  .panel-heading= @recipe.title
+  .panel-body
+    .label.label-primary Content
+    = simple_format @recipe.content
+  .panel-footer
+    %span.label.label-primary Book
+    = @recipe.book
 = link_to 'Edit', edit_recipe_path(@recipe)
 |
 = link_to 'Destroy', @recipe, method: :delete, data: {confirm: 'Are you sure?'}

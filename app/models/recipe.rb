@@ -1,6 +1,9 @@
 class Recipe < ActiveRecord::Base
   has_one :search_content
 
+  validates :title, presence: true
+  validates :content, presence: true
+
   after_save :update_search_content
   after_destroy :remove_search_content
 

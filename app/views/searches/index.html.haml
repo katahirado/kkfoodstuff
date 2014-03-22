@@ -1,6 +1,9 @@
 %h1 検索結果
-.list-group
-  - @recipes.each do |recipe|
-    = link_to recipe,class: 'list-group-item' do
-      %h4.list-group-item-heading= recipe.title
-      %p.list-group-item-text= recipe.book
+- if @recipes.empty?
+  %p レシピが見つかりませんでした。
+- else
+  .list-group
+    - @recipes.each do |recipe|
+      = link_to recipe,class: 'list-group-item' do
+        %h4.list-group-item-heading= recipe.title
+        %p.list-group-item-text= recipe.book
