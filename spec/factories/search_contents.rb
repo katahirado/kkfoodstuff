@@ -1,7 +1,6 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :search_content do
-    recipe nil
+    origin_title "MyString"
+    origin_content "MyText"
   end
 end
