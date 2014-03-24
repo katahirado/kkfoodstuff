@@ -1,12 +1,11 @@
 = form_for(@recipe, html: {role: 'form'}) do |f|
   - if @recipe.errors.any?
     #error_explanation
-      %h2
-        = pluralize(@recipe.errors.count, "error")
-        prohibited this recipe from being saved:
+      %h2.text-danger
+        = t('errors.template.header',model: Recipe.model_name.human,count: @recipe.errors.count)
       %ul
         - @recipe.errors.full_messages.each do |msg|
-          %li= msg
+          %li.text-danger= msg
   .form-group
     = f.label :title
     = f.text_field :title,class: 'form-control'
