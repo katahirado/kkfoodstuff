@@ -25,5 +25,10 @@ module Kkfoodstuff
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     config.i18n.default_locale = :ja
+    config.generators do |g|
+      g.controller_specs = false
+      g.helper_specs = false
+      g.view_specs = false
+    end
   end
 end
