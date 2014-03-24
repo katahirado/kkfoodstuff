@@ -43,6 +43,7 @@ end
 gem 'erb2haml', group: :development
 
 group :development, :test do
+  gem "capybara", "~> 2.2.1"
   gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'factory_girl_rails'
 end
