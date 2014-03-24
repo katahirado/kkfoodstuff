@@ -125,8 +125,8 @@ ja:
     template:
       body: 次の項目を確認してください。
       header:
-        one: ! '%{model}にエラーが発生しました。'
-        other: ! '%{model}に%{count}個のエラーが発生しました。'
+        one: ! '%{model}に入力不備があります。'
+        other: ! '%{model}に%{count}個の入力不備があります。'
   helpers:
     select:
       prompt: 選択してください。
