@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Recipe do
   let(:recipe) { FactoryGirl.build(:recipe) }
 
-  describe 'title' do
+  describe '#title' do
     context 'when title is not present' do
       before { recipe.title = nil }
       it {
@@ -13,7 +13,7 @@ describe Recipe do
     end
   end
 
-  describe 'content' do
+  describe '#content' do
     context 'when content is not present' do
       before { recipe.content = nil }
       it {

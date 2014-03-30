@@ -47,6 +47,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'factory_girl_rails'
   gem "shoulda-matchers", "~> 2.5.0"
+  gem "database_cleaner", "~> 1.2.0"
 end
 
 gem 'simplecov', require: false, group: :test
