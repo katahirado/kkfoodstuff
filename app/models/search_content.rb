@@ -11,7 +11,11 @@ class SearchContent < ActiveRecord::Base
   }
 
   scope :like_search, ->(query_string) {
-    where(arel_table[:origin_title].matches("%#{query_string}%").or(arel_table[:origin_content].matches("%#{query_string}%")))
+    where(arel_table[:origin_title].matches("%#{query_string}%").or(
+            arel_table[:origin_content].matches("%#{query_string}%")).or(
+            arel_table[:title].matches("%#{query_string}%")).or(
+            arel_table[:content].matches("%#{query_string}%")
+          ))
   }
 
   def self.search(query_string)
