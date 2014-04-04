@@ -7,22 +7,23 @@ class SearchContent < ActiveRecord::Base
   before_save :analyze_title_and_content
 
   scope :fulltext_search, ->(query_string) {
-    where("match(search_contents.title,search_contents.content) against(? in boolean mode)", Analyze.parse(query_string))
+    where("match(search_contents.title,search_contents.content) against(? in boolean mode)", "#{query_string} #{Analyze.parse(query_string, '-Oyomi')}")
   }
 
-  scope :like_search, ->(query_string) {
-    where(arel_table[:origin_title].matches("%#{query_string}%").or(arel_table[:origin_content].matches("%#{query_string}%")).or(
-            arel_table[:title].matches("%#{query_string}%")).or(arel_table[:content].matches("%#{query_string}%")))
+  scope :ngram_search, ->(query_string) {
+    where("match(search_contents.title_ngram,search_contents.content_ngram) against (? in boolean mode)", Analyze.ngram(query_string, ' +'))
   }
 
   def self.search(query_string)
-    where("#{fulltext_search(query_string).where_values[0]} OR #{like_search(query_string).where_values.inject(:or).to_sql}")
+    where("#{fulltext_search(query_string).where_values[0]} OR #{ngram_search(query_string).where_values[0]}").order(:title_yomi)
   end
 
   private
   def analyze_title_and_content
     self.title = Analyze.parse(self.origin_title)
-    self.title_yomi = Analyze.parse(self.origin_title,'-Oyomi')
+    self.title_yomi = Analyze.parse(self.origin_title, '-Oyomi')
+    self.title_ngram = Analyze.ngram(self.origin_title)
     self.content = Analyze.parse(self.origin_content)
+    self.content_ngram = Analyze.ngram(self.origin_content)
   end
 end

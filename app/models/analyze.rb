@@ -4,4 +4,8 @@ class Analyze
   def self.parse(text, format = DEFAULT_FORMAT)
     Natto::MeCab.new(format).parse(text).strip
   end
+
+  def self.ngram(string, separator= ' ')
+    NGram.new({size: 2, word_separator: "", padchar: ""}).parse(string).join(separator)
+  end
 end

@@ -28,15 +28,15 @@ describe SearchContent do
     let!(:search_content2) { FactoryGirl.create(:search_content, origin_title: 'ハクサイの炒めもの', origin_content: "にんじん\n豚肉\n白菜") }
     let!(:search_content3) { FactoryGirl.create(:search_content, origin_title: '炒めもの', origin_content: "ニンジン\n豚肉\n白菜") }
 
+    before(:all) do
+      DatabaseCleaner.strategy = :truncation
+    end
+
+    after(:all) do
+      DatabaseCleaner.strategy = :transaction
+    end
+
     describe '.fulltext_search' do
-
-      before(:all) do
-        DatabaseCleaner.strategy = :truncation
-      end
-
-      after(:all) do
-        DatabaseCleaner.strategy = :transaction
-      end
 
       it {
         expect(SearchContent.fulltext_search('にんじん')).to have(3).item
@@ -44,32 +44,24 @@ describe SearchContent do
         expect(SearchContent.fulltext_search('人参')).to have(3).item
         expect(SearchContent.fulltext_search('白菜')).to have(3).item
         expect(SearchContent.fulltext_search('ハクサイ')).to have(3).item
-        expect(SearchContent.fulltext_search('はくさい')).to be_empty
+        expect(SearchContent.fulltext_search('はくさい')).to have(3).item
       }
     end
 
-    describe '.like_search' do
+    describe '.ngram_search' do
       it {
-        expect(SearchContent.like_search('白菜の')).to have(1).item
-        expect(SearchContent.like_search('の炒め')).to have(2).item
-        expect(SearchContent.like_search('人参')).to have(1).item
-        expect(SearchContent.like_search('にんじん')).to have(3).item
-        expect(SearchContent.like_search('ニンジン')).to have(3).item
-        expect(SearchContent.like_search('白菜')).to have(3).item
-        expect(SearchContent.like_search('ハクサイ')).to have(3).item
-        expect(SearchContent.like_search('はくさい')).to have(3).item
+        expect(SearchContent.ngram_search('白菜の')).to have(1).item
+        expect(SearchContent.ngram_search('炒めもの')).to have(3).item
+        expect(SearchContent.ngram_search('人参')).to have(1).item
+        expect(SearchContent.ngram_search('にんじん')).to have(2).item
+        expect(SearchContent.ngram_search('ニンジン')).to have(2).item
+        expect(SearchContent.ngram_search('白菜')).to have(3).item
+        expect(SearchContent.ngram_search('ハクサイ')).to have(1).item
+        expect(SearchContent.ngram_search('はくさい')).to have(1).item
       }
     end
 
     describe '.search' do
-      before(:all) do
-        DatabaseCleaner.strategy = :truncation
-      end
-
-      after(:all) do
-        DatabaseCleaner.strategy = :transaction
-      end
-
       it {
         expect(SearchContent.search('にんじん')).to have(3).item
         expect(SearchContent.search('ニンジン')).to have(3).item
