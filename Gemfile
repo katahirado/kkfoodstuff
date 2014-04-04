@@ -29,6 +29,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 1.2'
 
 gem 'natto'
+gem "ngram", "~> 1.0.0"
 gem 'kaminari', '~> 0.15.1'
 
 # Haml
