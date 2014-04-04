@@ -39,23 +39,23 @@ describe SearchContent do
     describe '.fulltext_search' do
 
       it {
-        expect(SearchContent.fulltext_search('にんじん')).to have(3).item
-        expect(SearchContent.fulltext_search('ニンジン')).to have(3).item
-        expect(SearchContent.fulltext_search('人参')).to have(3).item
-        expect(SearchContent.fulltext_search('白菜')).to have(3).item
-        expect(SearchContent.fulltext_search('ハクサイ')).to have(3).item
-        expect(SearchContent.fulltext_search('はくさい')).to have(3).item
+        expect(SearchContent.fulltext_search('にんじん')).to have(3).items
+        expect(SearchContent.fulltext_search('ニンジン')).to have(3).items
+        expect(SearchContent.fulltext_search('人参')).to have(3).items
+        expect(SearchContent.fulltext_search('白菜')).to have(3).items
+        expect(SearchContent.fulltext_search('ハクサイ')).to have(3).items
+        expect(SearchContent.fulltext_search('はくさい')).to have(3).items
       }
     end
 
     describe '.ngram_search' do
       it {
         expect(SearchContent.ngram_search('白菜の')).to have(1).item
-        expect(SearchContent.ngram_search('炒めもの')).to have(3).item
+        expect(SearchContent.ngram_search('炒めもの')).to have(3).items
         expect(SearchContent.ngram_search('人参')).to have(1).item
-        expect(SearchContent.ngram_search('にんじん')).to have(2).item
-        expect(SearchContent.ngram_search('ニンジン')).to have(2).item
-        expect(SearchContent.ngram_search('白菜')).to have(3).item
+        expect(SearchContent.ngram_search('にんじん')).to have(2).items
+        expect(SearchContent.ngram_search('ニンジン')).to have(2).items
+        expect(SearchContent.ngram_search('白菜')).to have(3).items
         expect(SearchContent.ngram_search('ハクサイ')).to have(1).item
         expect(SearchContent.ngram_search('はくさい')).to have(1).item
       }
@@ -63,13 +63,14 @@ describe SearchContent do
 
     describe '.search' do
       it {
-        expect(SearchContent.search('にんじん')).to have(3).item
-        expect(SearchContent.search('ニンジン')).to have(3).item
-        expect(SearchContent.search('人参')).to have(3).item
-        expect(SearchContent.search('はくさい')).to have(3).item
-        expect(SearchContent.search('ハクサイ')).to have(3).item
-        expect(SearchContent.search('白菜')).to have(3).item
+        expect(SearchContent.search('にんじん')).to have(3).items
+        expect(SearchContent.search('ニンジン')).to have(3).items
+        expect(SearchContent.search('人参')).to have(3).items
+        expect(SearchContent.search('はくさい')).to have(3).items
+        expect(SearchContent.search('ハクサイ')).to have(3).items
+        expect(SearchContent.search('白菜')).to have(3).items
         expect(SearchContent.search('白菜').first).to eq search_content3
+        expect(SearchContent.search('ハクサイ 炒めもの')).to have(1).item
       }
     end
   end
