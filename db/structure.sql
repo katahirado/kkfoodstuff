@@ -30,7 +30,7 @@ CREATE TABLE `recipes` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `search_contents` (
   KEY `index_search_contents_on_recipe_id` (`recipe_id`),
   FULLTEXT KEY `search_contents_fulltext_index` (`title`,`content`),
   FULLTEXT KEY `search_contents_ngram_fulltext_index` (`title_ngram`,`content_ngram`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -81,7 +81,7 @@ CREATE TABLE `search_contents` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-04-04 15:10:18
+-- Dump completed on 2014-04-04 20:54:15
 INSERT INTO schema_migrations (version) VALUES ('20140318023054');
 
 INSERT INTO schema_migrations (version) VALUES ('20140318065327');
