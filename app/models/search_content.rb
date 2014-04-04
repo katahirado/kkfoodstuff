@@ -16,7 +16,7 @@ class SearchContent < ActiveRecord::Base
 
   def self.search(query_string)
     if query_string.split(/[[:space:]]/).size > 1
-      ngram_search(query_string)
+      ngram_search(query_string.gsub(/[[:space:]]/, ' '))
     else
       where("#{fulltext_search(query_string).where_values[0]} OR #{ngram_search(query_string).where_values[0]}")
     end.order(:title_yomi)

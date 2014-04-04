@@ -71,6 +71,7 @@ describe SearchContent do
         expect(SearchContent.search('白菜')).to have(3).items
         expect(SearchContent.search('白菜').first).to eq search_content3
         expect(SearchContent.search('ハクサイ 炒めもの')).to have(1).item
+        expect(SearchContent.search('ハクサイ　炒めもの')).to have(1).item
       }
     end
   end
