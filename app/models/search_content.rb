@@ -11,7 +11,7 @@ class SearchContent < ActiveRecord::Base
   }
 
   scope :ngram_search, ->(query_string) {
-    where("match(search_contents.title_ngram,search_contents.content_ngram) against (? in boolean mode)", Analyze.ngram(query_string, ' +'))
+    where("match(search_contents.title_ngram,search_contents.content_ngram) against (? in boolean mode)", "+#{Analyze.ngram(query_string, ' +')}")
   }
 
   def self.search(query_string)
