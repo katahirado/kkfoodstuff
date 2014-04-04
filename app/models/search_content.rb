@@ -22,6 +22,7 @@ class SearchContent < ActiveRecord::Base
   private
   def analyze_title_and_content
     self.title = Analyze.parse(self.origin_title)
+    self.title_yomi = Analyze.parse(self.origin_title,'-Oyomi')
     self.content = Analyze.parse(self.origin_content)
   end
 end

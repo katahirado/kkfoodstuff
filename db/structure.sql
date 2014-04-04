@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.6.15, for osx10.9 (x86_64)
 --
--- Host: localhost    Database: kkfoodstuff_test
+-- Host: localhost    Database: kkfoodstuff_development
 -- ------------------------------------------------------
 -- Server version	5.6.15
 
@@ -30,7 +30,7 @@ CREATE TABLE `recipes` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,10 +62,11 @@ CREATE TABLE `search_contents` (
   `content` text COLLATE utf8_unicode_ci,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
+  `title_yomi` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `index_search_contents_on_recipe_id` (`recipe_id`),
   FULLTEXT KEY `search_contents_fulltext_index` (`title`,`content`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -77,9 +78,11 @@ CREATE TABLE `search_contents` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-03-30 22:49:49
+-- Dump completed on 2014-04-04 11:16:01
 INSERT INTO schema_migrations (version) VALUES ('20140318023054');
 
 INSERT INTO schema_migrations (version) VALUES ('20140318065327');
 
 INSERT INTO schema_migrations (version) VALUES ('20140320120819');
+
+INSERT INTO schema_migrations (version) VALUES ('20140404020641');

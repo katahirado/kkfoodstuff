@@ -86,6 +86,7 @@ describe SearchContent do
     it {
       expect(search_content.title).to eq '大根 ダイコン'
       expect(search_content.content).to eq '人参 ニンジン'
+      expect(search_content.title_yomi).to eq 'ダイコン'
     }
   end
 end
