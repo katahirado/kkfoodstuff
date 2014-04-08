@@ -1,29 +1,14 @@
-== README
+kkfoodstuff
+======================
+レシピ本の食材検索アプリ
+MySQL InnoDBの全文検索機能をつかっているので、MySQLは5.6.4以上です。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 動かしてみる場合
+my.cnfに下記追加
 
-Things you may want to cover:
+```
+    [mysqld]
+    innodb_ft_min_token_size = 2
+```
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
-
+後はdatabase.yml.sampleをコピペしてdatabase.ymlを作って、いつもどおりな感じで。
