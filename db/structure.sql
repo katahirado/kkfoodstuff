@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.15, for osx10.9 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.17, for osx10.9 (x86_64)
 --
 -- Host: localhost    Database: kkfoodstuff_development
 -- ------------------------------------------------------
--- Server version	5.6.15
+-- Server version	5.6.17
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -81,7 +81,7 @@ CREATE TABLE `search_contents` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-04-04 20:54:15
+-- Dump completed on 2014-04-09  2:20:00
 INSERT INTO schema_migrations (version) VALUES ('20140318023054');
 
 INSERT INTO schema_migrations (version) VALUES ('20140318065327');

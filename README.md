@@ -9,7 +9,7 @@ MySQLは5.6.4以上を用意
 my.cnfに下記追加  
 ```
     [mysqld]
-    innodb_ft_min_token_size = 2
+    innodb_ft_min_token_size = 1
 ```
 mecabとmecab-ipadicをインストール  
 後はdatabase.yml.sampleをコピペしてdatabase.ymlを作って、いつもどおりな感じで。
