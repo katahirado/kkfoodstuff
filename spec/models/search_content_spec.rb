@@ -52,6 +52,7 @@ describe SearchContent do
       expect(SearchContent.search('ニ')).to have(2).item
       expect(SearchContent.search('に')).to have(2).item
       expect(SearchContent.search('人')).to have(1).item
+      expect(SearchContent.search('豚 炒')).to have(1).item
     }
   end
 
