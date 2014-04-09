@@ -14,6 +14,12 @@ class SearchContent < ActiveRecord::Base
     where("match(search_contents.title_ngram,search_contents.content_ngram) against (? in boolean mode)", query_string)
   }
 
+  scope :like_search, ->(query_array) {
+    title_cont_all_sql = query_array.map { |q| "#{where("origin_title LIKE ? ", "%#{q}%").where_values[0]}" }.join(" AND ")
+    content_cont_all_sql = query_array.map { |q| "#{where("origin_content LIKE ? ", "%#{q}%").where_values[0]}" }.join(" AND ")
+    where("(#{title_cont_all_sql}) OR (#{content_cont_all_sql})")
+  }
+
   def self.search(query_string)
     query_array = query_string.split(/[[:space:]]/)
     where("#{fulltext_search(surface_and_yomi_string(query_array)).where_values[0]} OR #{ngram_or_like(query_array).where_values[0]}").order(:title_yomi)
@@ -21,7 +27,7 @@ class SearchContent < ActiveRecord::Base
 
   def self.ngram_or_like(query_array)
     if query_array.find { |q| q.size == 1 }
-      #like_search
+      like_search(query_array)
     else
       ngram_search(ngram_search_string(query_array))
     end
