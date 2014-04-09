@@ -6,8 +6,11 @@ class SearchContent < ActiveRecord::Base
 
   before_save :analyze_title_and_content
 
-  scope :fulltext_search, ->(query_string) {
-    where("match(search_contents.title,search_contents.content) against(? in boolean mode)", query_string)
+  scope :fulltext_search, ->(query_array) {
+    fulltext_cont_all_sql = query_array.map { |q|
+      where("match(search_contents.title,search_contents.content) against(? in boolean mode)", q).where_values[0]
+    }.join(" AND ")
+    where(fulltext_cont_all_sql)
   }
 
   scope :ngram_search, ->(query_string) {
@@ -15,14 +18,14 @@ class SearchContent < ActiveRecord::Base
   }
 
   scope :like_search, ->(query_array) {
-    title_cont_all_sql = query_array.map { |q| "#{where("origin_title LIKE ? ", "%#{q}%").where_values[0]}" }.join(" AND ")
-    content_cont_all_sql = query_array.map { |q| "#{where("origin_content LIKE ? ", "%#{q}%").where_values[0]}" }.join(" AND ")
+    title_cont_all_sql = query_array.map { |q| where("origin_title LIKE ? ", "%#{q}%").where_values[0] }.join(" AND ")
+    content_cont_all_sql = query_array.map { |q| where("origin_content LIKE ? ", "%#{q}%").where_values[0] }.join(" AND ")
     where("(#{title_cont_all_sql}) OR (#{content_cont_all_sql})")
   }
 
   def self.search(query_string)
     query_array = query_string.split(/[[:space:]]/)
-    where("#{fulltext_search(surface_and_yomi_string(query_array)).where_values[0]} OR #{ngram_or_like(query_array).where_values[0]}").order(:title_yomi)
+    where("(#{fulltext_search(surface_and_yomi_strings(query_array)).where_values[0]}) OR #{ngram_or_like(query_array).where_values[0]}").order(:title_yomi)
   end
 
   def self.ngram_or_like(query_array)
@@ -34,15 +37,15 @@ class SearchContent < ActiveRecord::Base
   end
 
 
-  def self.surface_and_yomi_string(query_array)
-    query_array.map { |q| "+(#{q} #{Analyze.parse(q, '-Oyomi')})" }.join(' ')
+  def self.surface_and_yomi_strings(query_array)
+    query_array.map { |q| "#{q} #{Analyze.parse(q, '-Oyomi')}" }
   end
 
   def self.ngram_search_string(query_array)
     query_array.map { |q| "+(+#{Analyze.ngram(q, ' +')})" }.join(' ')
   end
 
-  private_class_method :surface_and_yomi_string, :ngram_search_string
+  private_class_method :surface_and_yomi_strings, :ngram_search_string
 
   private
   def analyze_title_and_content

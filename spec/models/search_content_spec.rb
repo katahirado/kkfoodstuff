@@ -27,6 +27,8 @@ describe SearchContent do
     let!(:search_content1) { FactoryGirl.create(:search_content, origin_title: '豚肉と白菜の炒めもの', origin_content: "人参\n豚肉\n白菜") }
     let!(:search_content2) { FactoryGirl.create(:search_content, origin_title: 'ハクサイの炒めもの', origin_content: "にんじん\n豚肉\n白菜") }
     let!(:search_content3) { FactoryGirl.create(:search_content, origin_title: '炒めもの', origin_content: "ニンジン\n豚肉\n白菜") }
+    let!(:search_content4) { FactoryGirl.create(:search_content, origin_title: '麩の吸いもの',origin_content: "麩")}
+    let!(:search_content5) { FactoryGirl.create(:search_content, origin_title: '麩の卵とじ',origin_content: "麩\n卵")}
 
     before(:all) do
       DatabaseCleaner.strategy = :truncation
@@ -44,8 +46,8 @@ describe SearchContent do
       expect(SearchContent.search('ハクサイ')).to have(3).items
       expect(SearchContent.search('白菜')).to have(3).items
       expect(SearchContent.search('白菜').first).to eq search_content3
-      expect(SearchContent.search('ハクサイ 炒めもの')).to have(3).item
-      expect(SearchContent.search('ハクサイ　炒めもの')).to have(3).item
+      expect(SearchContent.search('ハクサイ 炒めもの')).to have(1).item
+      expect(SearchContent.search('ハクサイ　炒めもの')).to have(1).item
       expect(SearchContent.search('白菜の')).to have(1).item
       expect(SearchContent.search('の炒めもの')).to have(2).item
       expect(SearchContent.search('豚肉と 炒めもの')).to have(1).item
@@ -53,6 +55,7 @@ describe SearchContent do
       expect(SearchContent.search('に')).to have(2).item
       expect(SearchContent.search('人')).to have(1).item
       expect(SearchContent.search('豚 炒')).to have(1).item
+      expect(SearchContent.search('麩 吸いもの')).to have(1).item
     }
   end
 
