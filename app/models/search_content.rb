@@ -7,20 +7,36 @@ class SearchContent < ActiveRecord::Base
   before_save :analyze_title_and_content
 
   scope :fulltext_search, ->(query_string) {
-    where("match(search_contents.title,search_contents.content) against(? in boolean mode)", "#{query_string} #{Analyze.parse(query_string, '-Oyomi')}")
+    where("match(search_contents.title,search_contents.content) against(? in boolean mode)", query_string)
   }
 
   scope :ngram_search, ->(query_string) {
-    where("match(search_contents.title_ngram,search_contents.content_ngram) against (? in boolean mode)", "+#{Analyze.ngram(query_string, ' +')}")
+    where("match(search_contents.title_ngram,search_contents.content_ngram) against (? in boolean mode)", query_string)
   }
 
   def self.search(query_string)
-    if query_string.split(/[[:space:]]/).size > 1
-      ngram_search(query_string.gsub(/[[:space:]]/, ' '))
-    else
-      where("#{fulltext_search(query_string).where_values[0]} OR #{ngram_search(query_string).where_values[0]}")
-    end.order(:title_yomi)
+    query_array = query_string.split(/[[:space:]]/)
+    where("#{fulltext_search(surface_and_yomi_string(query_array)).where_values[0]} OR #{ngram_or_like(query_array).where_values[0]}").order(:title_yomi)
   end
+
+  def self.ngram_or_like(query_array)
+    if query_array.find { |q| q.size == 1 }
+      #like_search
+    else
+      ngram_search(ngram_search_string(query_array))
+    end
+  end
+
+
+  def self.surface_and_yomi_string(query_array)
+    query_array.map { |q| "+(#{q} #{Analyze.parse(q, '-Oyomi')})" }.join(' ')
+  end
+
+  def self.ngram_search_string(query_array)
+    query_array.map { |q| "+(+#{Analyze.ngram(q, ' +')})" }.join(' ')
+  end
+
+  private_class_method :surface_and_yomi_string, :ngram_search_string
 
   private
   def analyze_title_and_content

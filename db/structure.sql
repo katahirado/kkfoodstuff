@@ -81,7 +81,7 @@ CREATE TABLE `search_contents` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-04-09  2:20:00
+-- Dump completed on 2014-04-09 15:07:15
 INSERT INTO schema_migrations (version) VALUES ('20140318023054');
 
 INSERT INTO schema_migrations (version) VALUES ('20140318065327');
