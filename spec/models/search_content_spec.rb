@@ -24,7 +24,7 @@ describe SearchContent do
   end
 
   describe '.search' do
-    let!(:search_content1) { FactoryGirl.create(:search_content, origin_title: '白菜の炒めもの', origin_content: "人参\n豚肉\n白菜") }
+    let!(:search_content1) { FactoryGirl.create(:search_content, origin_title: '豚肉と白菜の炒めもの', origin_content: "人参\n豚肉\n白菜") }
     let!(:search_content2) { FactoryGirl.create(:search_content, origin_title: 'ハクサイの炒めもの', origin_content: "にんじん\n豚肉\n白菜") }
     let!(:search_content3) { FactoryGirl.create(:search_content, origin_title: '炒めもの', origin_content: "ニンジン\n豚肉\n白菜") }
 
@@ -48,7 +48,7 @@ describe SearchContent do
       expect(SearchContent.search('ハクサイ　炒めもの')).to have(3).item
       expect(SearchContent.search('白菜の')).to have(1).item
       expect(SearchContent.search('の炒めもの')).to have(2).item
-      expect(SearchContent.search('白菜の 炒めもの')).to have(1).item
+      expect(SearchContent.search('豚肉と 炒めもの')).to have(1).item
       expect(SearchContent.search('ニ')).to have(2).item
       expect(SearchContent.search('に')).to have(2).item
       expect(SearchContent.search('人')).to have(1).item
