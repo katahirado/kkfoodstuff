@@ -48,6 +48,7 @@ describe SearchContent do
       expect(SearchContent.search('ハクサイ　炒めもの')).to have(3).item
       expect(SearchContent.search('白菜の')).to have(1).item
       expect(SearchContent.search('の炒めもの')).to have(2).item
+      expect(SearchContent.search('白菜の 炒めもの')).to have(1).item
       expect(SearchContent.search('ニ')).to have(2).item
       expect(SearchContent.search('に')).to have(2).item
       expect(SearchContent.search('人')).to have(1).item
