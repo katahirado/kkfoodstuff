@@ -56,6 +56,8 @@ describe SearchContent do
       expect(SearchContent.search('人')).to have(1).item
       expect(SearchContent.search('豚 炒')).to have(1).item
       expect(SearchContent.search('麩 吸いもの')).to have(1).item
+      expect(SearchContent.search('豚肉と うま煮')).to be_empty
+      expect(SearchContent.search('豚肉 納豆')).to be_empty
     }
   end
 
