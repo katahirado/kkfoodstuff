@@ -7,23 +7,23 @@ class SearchContent < ActiveRecord::Base
   before_save :analyze_title_and_content
 
   scope :fulltext_search, ->(query_array) {
-    sql = query_array.map { |q|
+    conditions = query_array.map { |q|
       where("match(search_contents.title,search_contents.content) against(? in boolean mode)", q).where_values[0]
     }.join(" AND ")
-    where(sql)
+    where(conditions)
   }
 
   scope :ngram_search, ->(query_array) {
-    sql = query_array.map { |n|
+    conditions = query_array.map { |n|
       where("match(search_contents.title_ngram,search_contents.content_ngram) against (? in boolean mode)", n).where_values[0]
     }.join(" AND ")
-    where(sql)
+    where(conditions)
   }
 
   scope :like_search, ->(query_array) {
-    title_cont_all_sql = query_array.map { |q| where("origin_title LIKE ? ", "%#{q}%").where_values[0] }.join(" AND ")
-    content_cont_all_sql = query_array.map { |q| where("origin_content LIKE ? ", "%#{q}%").where_values[0] }.join(" AND ")
-    where("(#{title_cont_all_sql}) OR (#{content_cont_all_sql})")
+    title_cont_all = query_array.map { |q| where("origin_title LIKE ? ", "%#{q}%").where_values[0] }.join(" AND ")
+    content_cont_all = query_array.map { |q| where("origin_content LIKE ? ", "%#{q}%").where_values[0] }.join(" AND ")
+    where("(#{title_cont_all}) OR (#{content_cont_all})")
   }
 
   def self.search(query_string)
