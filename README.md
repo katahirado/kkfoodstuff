@@ -12,4 +12,5 @@ my.cnfに下記追加
     innodb_ft_min_token_size = 1
 ```
 mecabとmecab-ipadicをインストール  
-後はdatabase.yml.sampleをコピペしてdatabase.ymlを作って、いつもどおりな感じで。
+後はdatabase.yml.sampleをコピペしてdatabase.ymlを作って、いつもどおりな感じで。  
+サンプルデータを投入する場合はrake db:seedで。
