@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.4'
+gem 'rails', '4.1.0'
 
 # Use mysql as the database for Active Record
 gem 'mysql2'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass', '~> 3.1.1'
 
 # Use Uglifier as compressor for JavaScript assets
@@ -26,7 +26,7 @@ gem 'jquery-rails'
 # gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder', '~> 2.0'
 
 gem 'natto'
 gem "ngram", "~> 1.0.0"
@@ -37,7 +37,7 @@ gem 'haml-rails'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
+  gem 'sdoc', '~> 0.4.0', require: false
 end
 
 # Converter erb => haml
@@ -47,7 +47,7 @@ group :development, :test do
   gem "capybara", "~> 2.2.1"
   gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'factory_girl_rails'
-  gem "shoulda-matchers", "~> 2.5.0"
+  gem "shoulda-matchers", "~> 2.6.0"
   gem "database_cleaner", "~> 1.2.0"
 end
 
